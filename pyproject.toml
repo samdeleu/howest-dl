@@ -1,0 +1,17 @@
+[project]
+name = "howest-dl"
+version = "0.1.0"
+description = "Howest Deep Learning 2024-2025"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "tensorflow[and-cuda]>=2.18.0",
+]
+
+[project.scripts]
+m = "howest_dl:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
