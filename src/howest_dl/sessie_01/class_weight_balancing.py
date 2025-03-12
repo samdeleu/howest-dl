@@ -32,20 +32,22 @@ from sklearn.utils import class_weight
 
 import tensorflow as tf
 
-from keras.layers import (
-    Dense,
-    Dropout,
-    Flatten,
-    Activation,
-    BatchNormalization,
-)
-from keras.callbacks import EarlyStopping
+# from keras.layers import (
+#     Dense,
+#     Dropout,
+#     Flatten,
+#     Activation,
+#     BatchNormalization,
+# )
+# from keras.callbacks import EarlyStopping
 
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Activation
+from tensorflow.keras.layers import (
+    Activation,
+    Dense, Dropout, Flatten, BatchNormalization,
+    Conv2D, MaxPooling2D,
+)
 from tensorflow.keras.optimizers import SGD
-from tensorflow.keras.layers import Dense, Dropout, Flatten, BatchNormalization
-from tensorflow.keras.layers import Conv2D, MaxPooling2D
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.preprocessing import image
 
@@ -78,3 +80,11 @@ plt.rcParams['image.cmap'] = 'gray'
 #     "font.size": "8",
 #     # "figure.figsize": [6,3],
 # })
+###### Voor Tensorflow-GPU ########
+
+physical_devices = tf.config.experimental.list_physical_devices('GPU')
+tf.config.experimental.set_memory_growth(physical_devices[0], True)
+print(physical_devices)
+
+if __name__ == '__main__':
+    print("------------")
