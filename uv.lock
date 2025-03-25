@@ -446,6 +446,15 @@ wheels = [
 ]
 
 [[package]]
+name = "graphviz"
+version = "0.20.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/fa/83/5a40d19b8347f017e417710907f824915fba411a9befd092e52746b63e9f/graphviz-0.20.3.zip", hash = "sha256:09d6bc81e6a9fa392e7ba52135a9d49f1ed62526f96499325930e87ca1b5925d", size = 256455 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/00/be/d59db2d1d52697c6adc9eacaf50e8965b6345cc143f671e1ed068818d5cf/graphviz-0.20.3-py3-none-any.whl", hash = "sha256:81f848f2904515d8cd359cc611faba817598d2feaac4027b266aa3eda7b3dde5", size = 47126 },
+]
+
+[[package]]
 name = "grpcio"
 version = "1.70.0"
 source = { registry = "https://pypi.org/simple" }
@@ -506,6 +515,7 @@ name = "howest-dl"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "graphviz" },
     { name = "imbalanced-learn" },
     { name = "ipykernel" },
     { name = "ipython" },
@@ -519,6 +529,7 @@ dependencies = [
     { name = "notebook" },
     { name = "numpy" },
     { name = "pandas" },
+    { name = "pydot" },
     { name = "pytest" },
     { name = "scikit-image" },
     { name = "scikit-learn" },
@@ -529,6 +540,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "graphviz", specifier = ">=0.20.3" },
     { name = "imbalanced-learn", specifier = ">=0.13.0" },
     { name = "ipykernel", specifier = ">=6.29.5" },
     { name = "ipython", specifier = "==8.33.0" },
@@ -542,6 +554,7 @@ requires-dist = [
     { name = "notebook", specifier = ">=7.3.2" },
     { name = "numpy", specifier = ">=2.0.2" },
     { name = "pandas", specifier = ">=2.2.3" },
+    { name = "pydot", specifier = ">=3.0.4" },
     { name = "pytest", specifier = ">=8.3.5" },
     { name = "scikit-image", specifier = ">=0.25.2" },
     { name = "scikit-learn", specifier = ">=1.6.1" },
@@ -1776,6 +1789,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/1d/b2/31537cf4b1ca988837256c910a668b553fceb8f069bedc4b1c826024b52c/pycparser-2.22.tar.gz", hash = "sha256:491c8be9c040f5390f5bf44a5b07752bd07f56edf992381b05c701439eec10f6", size = 172736 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/13/a3/a812df4e2dd5696d1f351d58b8fe16a405b234ad2886a0dab9183fb78109/pycparser-2.22-py3-none-any.whl", hash = "sha256:c3702b6d3dd8c7abc1afa565d7e63d53a1d0bd86cdc24edd75470f4de499cfcc", size = 117552 },
+]
+
+[[package]]
+name = "pydot"
+version = "3.0.4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pyparsing" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/66/dd/e0e6a4fb84c22050f6a9701ad9fd6a67ef82faa7ba97b97eb6fdc6b49b34/pydot-3.0.4.tar.gz", hash = "sha256:3ce88b2558f3808b0376f22bfa6c263909e1c3981e2a7b629b65b451eee4a25d", size = 168167 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b0/5f/1ebfd430df05c4f9e438dd3313c4456eab937d976f6ab8ce81a98f9fb381/pydot-3.0.4-py3-none-any.whl", hash = "sha256:bfa9c3fc0c44ba1d132adce131802d7df00429d1a79cc0346b0a5cd374dbe9c6", size = 35776 },
 ]
 
 [[package]]

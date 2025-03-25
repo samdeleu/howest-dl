@@ -127,3 +127,7 @@ _sam*
 
 # csv files
 *.csv
+
+# images
+*.jpg
+
