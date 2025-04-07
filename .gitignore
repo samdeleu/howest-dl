@@ -140,3 +140,5 @@ logs/
 # images
 *.jpg
 
+# Udemy execises
+udemy_1/
