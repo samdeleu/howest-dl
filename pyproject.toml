@@ -25,6 +25,7 @@ dependencies = [
     "scikit-image>=0.25.2",
     "scikit-learn>=1.6.1",
     "seaborn>=0.13.2",
+    "seaborn-image>=0.10.0",
     "tensorflow[and-cuda]>=2.18.0",
     "termcolor>=2.5.0",
 ]

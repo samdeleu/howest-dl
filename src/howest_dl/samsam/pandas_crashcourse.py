@@ -1,8 +1,3 @@
-import numpy as np
+import pandas as pd
 
-np.random.random
-np.random.randn(3)
-np.random.randn(3)
-
-mat = np.array([1,2,3,4,5])
-mat.sum
+s = pd.Series()

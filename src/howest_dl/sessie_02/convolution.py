@@ -14,3 +14,5 @@ fig = plt.figure(figsize=(5,2.5))
 print(plt.imshow(base_image))
 #%%
 
+if __name__ == '__main__':
+    print("main")
