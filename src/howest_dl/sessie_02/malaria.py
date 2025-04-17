@@ -57,18 +57,21 @@ from scipy.stats import uniform
 import tensorflow
 #from tensorflow.keras.layers import BatchNormalization
 import tensorflow as tf
+from tensorflow.keras.layers import (
+    BatchNormalization,
+    Rescaling,
+)
+
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import (
     Activation,
     AveragePooling2D,
-    BatchNomalization,
     Conv2D,
     Dense,
     Dropout,
     Flatten,
     Input,
     MaxPooling2D,
-    Rescaling,
 )
 
 from tensorflow.python.keras.activations import (
@@ -99,7 +102,6 @@ from howest_dl.sessie_02.helpers import (
     print_binary_metrics,
     read_images,
 )
-from howest_dl.sessie_02.model_explorer import model_explorer
 
 # Reading the data
 def read_malaria_input(sample_size=1000, image_size=100):
@@ -250,4 +252,45 @@ def build_malaria_model_based_on_vgg():
     type(modelVGG19)
 
 if __name__ == '__main__':
-    pass
+    image_size = 50
+    sample_size = 1000
+    X_train, y_train, X_test, y_test = read_malaria_input(sample_size=sample_size, image_size=image_size)
+    print(type(X_train))
+
+    preprocess_data()
+    malaria_model = build_malaria_model(input_shape=(image_size, image_size, 3))
+    print(malaria_model.summary())
+
+    history, timing = train_malaria_model(
+        model=malaria_model,
+        X_train_input=X_train, y_train_input=y_train,
+        description="First attempt"
+    )
+    print(malaria_model.metrics_names)
+    # Metrics on the training set
+    print_binary_metrics(model=malaria_model, X_test_input=X_train, y_test_input=y_train, decision_boundary=0.5,
+                         title="Training Set")
+    # Metrics on the test set
+    print_binary_metrics(model=malaria_model, X_test_input=X_test, y_test_input=y_test, decision_boundary=0.5,
+                         title="Test Set")
+    collect_accuracy(model=malaria_model, X_train_input=X_train, y_train_input=y_train, X_test_input=X_test,
+                     y_test_input=y_test, decision_boundary=0.5)
+
+    # Metrics on the training set
+    print_binary_metrics(model=malaria_model, X_test_input=X_train, y_test_input=y_train, decision_boundary=0.95,
+                         title="Training Set")
+    # Metrics on the test set
+    print_binary_metrics(model=malaria_model, X_test_input=X_test, y_test_input=y_test, decision_boundary=0.95,
+                         title="Test Set")
+    collect_accuracy(model=malaria_model, X_train_input=X_train, y_train_input=y_train, X_test_input=X_test,
+                     y_test_input=y_test, decision_boundary=0.95)
+
+    y_pred_proba = malaria_model.predict(X_test).flatten()
+    y_pred_class = (y_pred_proba >= 0.95).astype(int)
+
+    X_test_fp = X_test[(y_test == 0) & (y_pred_class == 1)]
+    X_test_fn = X_test[(y_test == 1) & (y_pred_class == 0)]
+
+    display_title("Examples of False Negatives")
+    for i in range(min([3, len(X_test_fn)])):
+        print(X_test_fn[i])

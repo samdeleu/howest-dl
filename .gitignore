@@ -140,5 +140,5 @@ logs/
 # images
 *.jpg
 
-# Udemy execises
-udemy_1/
+# Udemy exercises
+udemy_1/**/DATA

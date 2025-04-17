@@ -14,16 +14,14 @@ from howest_dl.sessie_02.helpers import (
     collect_accuracy,
     print_binary_metrics,
 )
-from tensorflow.keras.layers import BatchNormalization
 
 if __name__ == '__main__':
-    a = BatchNormalization()
     image_size = 50
     sample_size = 1000
     X_train, y_train, X_test, y_test = read_malaria_input(sample_size=sample_size, image_size=image_size)
     print(type(X_train))
 
-    skip = False
+    skip = True
     if not skip:
         preprocess_data()
         malaria_model = build_malaria_model(input_shape=(image_size, image_size, 3))
@@ -66,353 +64,353 @@ if __name__ == '__main__':
     image_shape = (image_size, image_size, 3)
     # Results: Name, threshold, "accuracy on training set", "accuracy on test set"
     malaria_models = [
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 01",
-            input_shape=image_shape,
-            feature_extractor=[
-                ("C", 128), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 64), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 32), "B", ("A", "relu"),
-                ("P", "max"),
-            ],
-            classifier=[
-                ("D", 128), "B", ("A", "relu"),
-                ("D", 64), "B", ("A", "relu"),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 02",
-            input_shape=image_shape,
-            feature_extractor=[
-                ("C", 16), "B", ("A", "relu"),
-                ("C", 32), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 64), "B", ("A", "relu"),
-                ("C", 64), "B", ("A", "relu"),
-                ("P", "max"),
-            ],
-            classifier=[
-                ("D", 64), "B", ("A", "relu"),
-                ("D", 32), "B", ("A", "relu"),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 03",
-            input_shape=image_shape,
-            feature_extractor=[
-                ("C", 128), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("P", "avg"),
-                ("C", 64), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("P", "avg"),
-                ("C", 32), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("P", "avg"),
-            ],
-            classifier=[
-                ("D", 128), "B", ("A", "relu"),
-                ("D", 64), "B", ("A", "relu"),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 04",
-            input_shape=(image_size, image_size, 3),
-            feature_extractor=[
-                ("C", 128), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("P", "max"),
-                ("C", 64), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("P", "max"),
-                ("C", 32), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("P", "max"),
-            ],
-            classifier=[
-                ("D", 128), "B", ("A", "relu"),
-                ("D", 64), "B", ("A", "relu"),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 05",
-            input_shape=image_shape,
-            feature_extractor=[
-                ("C", 128), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("P", "max"),
-                ("C", 64), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("P", "max"),
-                ("C", 32), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("P", "max"),
-            ],
-            classifier=[
-                ("D", 128), "B", ("A", "relu"),
-                ("D", 64), "B", ("A", "relu"),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 06",
-            input_shape=image_shape,
-            feature_extractor=[
-                ("C", 256), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("P", "max"),
-                ("C", 128), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("P", "max"),
-                ("C", 64), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("P", "max"),
-                ("C", 32), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("P", "max"),
-            ],
-            classifier=[
-                ("D", 128), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("D", 64), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 07",
-            input_shape=image_shape,
-            feature_extractor=[
-                ("C", 16), "B", ("A", "relu"),
-                ("C", 32), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 64), "B", ("A", "relu"),
-                ("C", 64), "B", ("A", "relu"),
-                ("P", "max"),
-            ],
-            classifier=[
-                ("D", 64), "B", ("A", "relu"),
-                ("D", 32), "B", ("A", "relu"),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 08",
-            input_shape=image_shape,
-            feature_extractor=[
-                ("C", 16), "B", ("A", "relu"),
-                ("C", 32), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 64), "B", ("A", "relu"),
-                ("C", 64), "B", ("A", "relu"),
-                ("P", "max"),
-            ],
-            classifier=[
-                ("D", 64), "B", ("A", "relu"),
-                ("D", 32), "B", ("A", "relu"),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 09",
-            input_shape=image_shape,
-            feature_extractor=[
-                ("C", 16), "B", ("A", "relu"),
-                ("C", 32), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 64), "B", ("A", "relu"),
-                ("C", 64), "B", ("A", "relu"),
-                ("P", "max"),
-            ],
-            classifier=[
-                ("D", 64), "B", ("A", "relu"),
-                ("D", 32), "B", ("A", "relu"),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 10",
-            input_shape=image_shape,
-            feature_extractor=[
-                ("C", 16), "B", ("A", "relu"),
-                ("C", 32), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 64), "B", ("A", "relu"),
-                ("C", 64), "B", ("A", "relu"),
-                ("P", "max"),
-            ],
-            classifier=[
-                ("D", 64), "B", ("A", "relu"),
-                ("D", 32), "B", ("A", "relu"),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 11",
-            input_shape=image_shape,
-            feature_extractor=[
-                ("C", 16), "B", ("A", "relu"),
-                ("C", 32), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 64), "B", ("A", "relu"),
-                ("C", 64), "B", ("A", "relu"),
-                ("P", "max"),
-            ],
-            classifier=[
-                ("D", 64), "B", ("A", "relu"),
-                ("D", 32), "B", ("A", "relu"),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 12",
-            input_shape=image_shape,
-            feature_extractor=[
-                ("C", 16), "B", ("A", "relu"),
-                ("C", 32), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 64), "B", ("A", "relu"),
-                ("C", 64), "B", ("A", "relu"),
-                ("P", "max"),
-            ],
-            classifier=[
-                ("D", 64), "B", ("A", "relu"),
-                ("D", 32), "B", ("A", "relu"),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 13",
-            input_shape=image_shape,
-            feature_extractor=[
-                ("C", 16), "B", ("A", "relu"),
-                ("C", 32), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 64), "B", ("A", "relu"),
-                ("C", 64), "B", ("A", "relu"),
-                ("P", "max"),
-            ],
-            classifier=[
-                ("D", 64), "B", ("A", "relu"),
-                ("D", 32), "B", ("A", "relu"),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 14",
-            input_shape=image_shape,
-            feature_extractor=[
-                ("C", 16), "B", ("A", "relu"),
-                ("C", 32), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 64), "B", ("A", "relu"),
-                ("C", 64), "B", ("A", "relu"),
-                ("P", "max"),
-            ],
-            classifier=[
-                ("D", 64), "B", ("A", "relu"),
-                ("D", 32), "B", ("A", "relu"),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 15",
-            input_shape=image_shape,
-            feature_extractor=[
-                ("C", 8), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 16), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 32), "B", ("A", "relu"),
-                ("P", "max"),
-            ],
-            classifier=[
-                ("D", 1024), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("D", 1024), "B", ("A", "relu"),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 16",
-            input_shape=image_shape,
-            feature_extractor=[
-                ("C", 8), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 16), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 32), "B", ("A", "relu"),
-                ("P", "max"),
-            ],
-            classifier=[
-                ("D", 1024), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("D", 1024), "B", ("A", "relu"),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 17",
-            input_shape=image_shape,
-            feature_extractor=[
-                ("C", 8), "B", ("A", "leaky_relu"),
-                ("P", "max"),
-                ("C", 16), "B", ("A", "leaky_relu"),
-                ("P", "max"),
-                ("C", 32), "B", ("A", "leaky_relu"),
-                ("P", "max"),
-            ],
-            classifier=[
-                ("D", 1024), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("D", 1024), "B", ("A", "relu"),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
-        model_explorer(
-            name=f"Exploration ({image_size}x{image_size}) 18",
-            input_shape=image_shape,
-            feature_extractor=[
-                ("C", 128), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 128), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 256), "B", ("A", "relu"),
-                ("P", "max"),
-                ("C", 128), "B", ("A", "relu"),
-                ("P", "max"),
-            ],
-            classifier=[
-                ("D", 1024), "B", ("A", "relu"),
-                ("Dr", 0.3),
-                ("D", 128), "B", ("A", "relu"),
-                ("D", 1),
-                ("A", "sigmoid"),
-            ]
-        ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 01",
+        #     input_shape=image_shape,
+        #     feature_extractor=[
+        #         ("C", 128), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 32), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #     ],
+        #     classifier=[
+        #         ("D", 128), "B", ("A", "relu"),
+        #         ("D", 64), "B", ("A", "relu"),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 02",
+        #     input_shape=image_shape,
+        #     feature_extractor=[
+        #         ("C", 16), "B", ("A", "relu"),
+        #         ("C", 32), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #     ],
+        #     classifier=[
+        #         ("D", 64), "B", ("A", "relu"),
+        #         ("D", 32), "B", ("A", "relu"),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 03",
+        #     input_shape=image_shape,
+        #     feature_extractor=[
+        #         ("C", 128), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("P", "avg"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("P", "avg"),
+        #         ("C", 32), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("P", "avg"),
+        #     ],
+        #     classifier=[
+        #         ("D", 128), "B", ("A", "relu"),
+        #         ("D", 64), "B", ("A", "relu"),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 04",
+        #     input_shape=(image_size, image_size, 3),
+        #     feature_extractor=[
+        #         ("C", 128), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("P", "max"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("P", "max"),
+        #         ("C", 32), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("P", "max"),
+        #     ],
+        #     classifier=[
+        #         ("D", 128), "B", ("A", "relu"),
+        #         ("D", 64), "B", ("A", "relu"),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 05",
+        #     input_shape=image_shape,
+        #     feature_extractor=[
+        #         ("C", 128), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("P", "max"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("P", "max"),
+        #         ("C", 32), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("P", "max"),
+        #     ],
+        #     classifier=[
+        #         ("D", 128), "B", ("A", "relu"),
+        #         ("D", 64), "B", ("A", "relu"),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 06",
+        #     input_shape=image_shape,
+        #     feature_extractor=[
+        #         ("C", 256), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("P", "max"),
+        #         ("C", 128), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("P", "max"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("P", "max"),
+        #         ("C", 32), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("P", "max"),
+        #     ],
+        #     classifier=[
+        #         ("D", 128), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("D", 64), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 07",
+        #     input_shape=image_shape,
+        #     feature_extractor=[
+        #         ("C", 16), "B", ("A", "relu"),
+        #         ("C", 32), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #     ],
+        #     classifier=[
+        #         ("D", 64), "B", ("A", "relu"),
+        #         ("D", 32), "B", ("A", "relu"),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 08",
+        #     input_shape=image_shape,
+        #     feature_extractor=[
+        #         ("C", 16), "B", ("A", "relu"),
+        #         ("C", 32), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #     ],
+        #     classifier=[
+        #         ("D", 64), "B", ("A", "relu"),
+        #         ("D", 32), "B", ("A", "relu"),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 09",
+        #     input_shape=image_shape,
+        #     feature_extractor=[
+        #         ("C", 16), "B", ("A", "relu"),
+        #         ("C", 32), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #     ],
+        #     classifier=[
+        #         ("D", 64), "B", ("A", "relu"),
+        #         ("D", 32), "B", ("A", "relu"),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 10",
+        #     input_shape=image_shape,
+        #     feature_extractor=[
+        #         ("C", 16), "B", ("A", "relu"),
+        #         ("C", 32), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #     ],
+        #     classifier=[
+        #         ("D", 64), "B", ("A", "relu"),
+        #         ("D", 32), "B", ("A", "relu"),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 11",
+        #     input_shape=image_shape,
+        #     feature_extractor=[
+        #         ("C", 16), "B", ("A", "relu"),
+        #         ("C", 32), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #     ],
+        #     classifier=[
+        #         ("D", 64), "B", ("A", "relu"),
+        #         ("D", 32), "B", ("A", "relu"),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 12",
+        #     input_shape=image_shape,
+        #     feature_extractor=[
+        #         ("C", 16), "B", ("A", "relu"),
+        #         ("C", 32), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #     ],
+        #     classifier=[
+        #         ("D", 64), "B", ("A", "relu"),
+        #         ("D", 32), "B", ("A", "relu"),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 13",
+        #     input_shape=image_shape,
+        #     feature_extractor=[
+        #         ("C", 16), "B", ("A", "relu"),
+        #         ("C", 32), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #     ],
+        #     classifier=[
+        #         ("D", 64), "B", ("A", "relu"),
+        #         ("D", 32), "B", ("A", "relu"),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 14",
+        #     input_shape=image_shape,
+        #     feature_extractor=[
+        #         ("C", 16), "B", ("A", "relu"),
+        #         ("C", 32), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("C", 64), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #     ],
+        #     classifier=[
+        #         ("D", 64), "B", ("A", "relu"),
+        #         ("D", 32), "B", ("A", "relu"),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 15",
+        #     input_shape=image_shape,
+        #     feature_extractor=[
+        #         ("C", 8), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 16), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 32), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #     ],
+        #     classifier=[
+        #         ("D", 1024), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("D", 1024), "B", ("A", "relu"),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 16",
+        #     input_shape=image_shape,
+        #     feature_extractor=[
+        #         ("C", 8), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 16), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 32), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #     ],
+        #     classifier=[
+        #         ("D", 1024), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("D", 1024), "B", ("A", "relu"),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 17",
+        #     input_shape=image_shape,
+        #     feature_extractor=[
+        #         ("C", 8), "B", ("A", "leaky_relu"),
+        #         ("P", "max"),
+        #         ("C", 16), "B", ("A", "leaky_relu"),
+        #         ("P", "max"),
+        #         ("C", 32), "B", ("A", "leaky_relu"),
+        #         ("P", "max"),
+        #     ],
+        #     classifier=[
+        #         ("D", 1024), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("D", 1024), "B", ("A", "relu"),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
+        # model_explorer(
+        #     name=f"Exploration ({image_size}x{image_size}) 18",
+        #     input_shape=image_shape,
+        #     feature_extractor=[
+        #         ("C", 128), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 128), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 256), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #         ("C", 128), "B", ("A", "relu"),
+        #         ("P", "max"),
+        #     ],
+        #     classifier=[
+        #         ("D", 1024), "B", ("A", "relu"),
+        #         ("Dr", 0.3),
+        #         ("D", 128), "B", ("A", "relu"),
+        #         ("D", 1),
+        #         ("A", "sigmoid"),
+        #     ]
+        # ),
         model_explorer(
             name=f"Exploration ({image_size}x{image_size}) 19",
             input_shape=image_shape,

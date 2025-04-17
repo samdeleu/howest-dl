@@ -30,6 +30,12 @@ import keras
 from sklearn.model_selection import train_test_split
 from sklearn.utils import class_weight
 
+from skimage.io import imread
+
+# distributions
+from scipy.stats import randint
+from scipy.stats import uniform
+
 import tensorflow as tf
 
 # from keras.layers import (
@@ -87,4 +93,5 @@ tf.config.experimental.set_memory_growth(physical_devices[0], True)
 print(physical_devices)
 
 if __name__ == '__main__':
+    df = pd.DataFrame([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     print("------------")

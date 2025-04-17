@@ -1,5 +1,12 @@
 # Tensorflow and Keras
+import tensorflow
 import tensorflow as tf
+
+from tensorflow.keras import layers
+from tensorflow.keras.layers import BatchNormalization
+
+from tensorflow import data
+
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.layers import (
     Activation,
@@ -8,13 +15,10 @@ from tensorflow.python.keras.layers import (
     Dense,
     Dropout,
     Flatten,
-    Input,
+    InputLayer,
     MaxPooling2D,
 )
 
-# from tensorflow.python.layers.normalization import (
-#     BatchNormalization,
-# )
 
 def model_explorer(name, input_shape, feature_extractor, classifier, skip=False):
     if skip:
@@ -22,7 +26,7 @@ def model_explorer(name, input_shape, feature_extractor, classifier, skip=False)
 
     model = Sequential()
     # Input Layer
-    model.add(Input(shape=input_shape))
+    model.add(InputLayer(input_shape=input_shape))
 
     # Feature Extraction Layers
     for fl in feature_extractor:
@@ -34,7 +38,7 @@ def model_explorer(name, input_shape, feature_extractor, classifier, skip=False)
             case ("A", "leaky_relu"):
                 model.add(Activation(tf.keras.activations.leaky_relu))
             case "B":
-                model.add(BatchNormalization())
+                model.add(layers.BatchNormalization())
             case ("Dr", rate):
                 model.add(Dropout(rate=rate))
             case ("P", "max"):
